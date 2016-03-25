@@ -1,0 +1,78 @@
+body {
+	color: #555;
+	font-family: 'Hiragino Kaku Gothic Pro', 'ヒラギノ角ゴ Pro W3', Meiryo, メイリオ, Osaka, 'MS PGothic', arial, helvetica, sans-serif;
+}
+
+hr {
+	margin-top: 40px;
+	border: none;
+	border-top: 1px solid #eee;
+	color: #eee;
+}
+
+.add-logo-font {
+	font-family: 'Comfortaa';
+	text-transform: none;
+}
+
+.add-with-border {
+	border: 1px solid #eee;
+}
+
+.add-img-link img:hover {
+	opacity: .5;
+}
+
+
+.menu-link {
+	background-color: #d65b84;
+}
+
+.menu-link:hover, .menu-link:focus {
+	background-color: #d65b84;
+	opacity: .5;
+}
+
+.header h2 {
+	color: #888;
+	margin-bottom: 40px;
+	font-size: 100%;
+}
+
+.content-subhead {
+	color: #333;
+}
+
+.content-subhead a {
+	color: #333;
+	text-decoration: none;
+}
+
+.content-subhead a:hover {
+	opacity: .5;
+}
+
+#menu a {
+	color: #333;
+}
+
+#menu a:hover, #menu a:focus {
+	color: #fff;
+}
+
+#menu {
+	background-color: rgba(255, 255, 255, 0.75);;
+}
+
+#menu .pure-menu-heading {
+	background-color: #d65b84;
+	font-size: 120%;
+}
+
+#menu .pure-menu-heading:hover {
+	opacity: .5;
+}
+
+#menu .pure-menu ul {
+	border-top: none;
+}

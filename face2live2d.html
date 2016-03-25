@@ -1,0 +1,230 @@
+<!--
+( ﾟдﾟ )
+-->
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="ブラウザ版簡易FaceRigみたいなやつです.Webカメラを用いて顔を撮影し,2次元のかわいい女の子(かっこいい男の子)に同じ表情・顔の向きをさせます.">
+  <meta name=”keywords” content=”Face2Live2D,いーふと,EafT,Webアプリ”>
+  <title>Eaft.org | Face2Live2D</title>
+
+  <link rel="shortcut icon" href="img/favicon.ico">
+  <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css">
+  <!--[if lte IE 8]>
+      <link rel="stylesheet" href="css/org/side-menu-old-ie.css">
+  <![endif]-->
+  <!--[if gt IE 8]><!-->
+      <link rel="stylesheet" href="css/org/side-menu.css">
+  <!--<![endif]-->
+  <link href='https://fonts.googleapis.com/css?family=Comfortaa' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/fontawesome/4.5.0/css/font-awesome.min.css">
+
+  <link rel="stylesheet" href="css/add.css">
+</head>
+<body onload="sampleApp1(); FaceDataSyncer();">
+
+<div id="layout">
+  <a href="#menu" id="menuLink" class="menu-link">
+    <span></span> <!-- Hamburger icon -->
+  </a>
+
+  <nav id="menu">
+    <div class="pure-menu">
+      <a class="pure-menu-heading add-logo-font js-pagelink" href="/">Eaft.org</a>
+
+      <ul class="pure-menu-list">
+        <li class="pure-menu-item"><a href="face2live2d.html" class="pure-menu-link js-pagelink">Face2Live2D</a></li>
+        <li class="pure-menu-item"><a href="oppaigraph.html" class="pure-menu-link js-pagelink">おっぱいグラフ</a></li>
+        <li class="pure-menu-item"><a href="index.html#about-me" class="pure-menu-link js-pagelink">作り手について</a></li>
+        <li class="pure-menu-item" id="js-frail-trigger"><a class="pure-menu-link">パルプンテ</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main id="main">
+    <header class="header">
+      <h1>Face2Live2D</h1>
+      <h2>
+        <a href="http://store.steampowered.com/app/274920/?l=japanese">FaceRig</a>に触発されてつくりました<br>
+        ブラウザ版簡易FaceRigみたいなやつです.<br>
+        Webカメラを用いて顔を撮影し,2次元のかわいい女の子(かっこいい男の子)に同じ表情・顔の向きをさせます.<br>
+        表示されない場合は最新のブラウザ(<a href="https://www.google.co.jp/chrome/browser/features.html">Google Chrome</a>)などをご使用ください.<br>
+        また,ブラウザから要求されるカメラの使用を許可してください.
+      </h2>
+    </header>
+
+    <div class="content">
+      <section>
+        <style>
+          #btnChange {
+            margin: 20px 0;
+          }
+
+          #glcanvas {
+            background-size: 150%;
+            background-position: 50% 50%;
+            background-image: url(face2live2d/assets/image/back_class_normal.png);
+          }
+
+          #user-face__video {
+            position: fixed;
+            right: 0;
+            bottom: 0;
+          }
+
+          #user-face__canvas {
+            position: fixed;
+            right: 0;
+            bottom: 0;
+          }
+        </style>
+
+        <button id="btnChange" class="active">Change Model</button>
+        <button id="js-toggle-camera">Toggle Camera</button>
+        <button id="js-toggle-face">Toggle Face</button>
+
+        <canvas id="glcanvas" width="680" height="940">
+          最新のブラウザ(<a href="https://www.google.co.jp/chrome/browser/features.html">Google Chrome</a>)などをご使用ください.
+        </canvas>
+        <video id="user-face__video" width="400" height="300" autoplay loop></video>
+        <canvas id="user-face__canvas" width="400" height="300"></canvas>
+
+        <script defer src="face2live2d/live2d.min.js"></script>
+        <script defer src="face2live2d/Live2DFramework.js"></script>
+
+        <script defer src="face2live2d/clmtrackr.min.js"></script>
+        <script defer src="face2live2d/model_pca_20_svm.js"></script>
+        <script defer src="face2live2d/FaceDataSyncer.js"></script>
+
+        <script defer src="face2live2d/utils/MatrixStack.js"></script>
+        <script defer src="face2live2d/utils/ModelSettingJson.js"></script>
+
+        <script defer src="face2live2d/PlatformManager.js"></script>
+        <script defer src="face2live2d/LAppDefine.js"></script>
+        <script defer src="face2live2d/LAppModel.js"></script>
+        <script defer src="face2live2d/LAppLive2DManager.js"></script>
+        <script defer src="face2live2d/SampleApp1.js"></script>
+
+        <script defer src="face2live2d/toggle.js"></script>
+      </section>
+
+      <hr>
+
+      <section>
+        <h2 class="content-subhead">元ネタ</h2>
+        <p>
+          すげえ!これで俺も女の子になれるじゃん!
+        </p>
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/cbIWRd514-s" frameborder="0" allowfullscreen></iframe>
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/g68DuWPRDk0" frameborder="0" allowfullscreen></iframe>
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/qNMSF0-BxIg" frameborder="0" allowfullscreen></iframe>
+      </section>
+
+      <hr>
+
+      <section>
+        <h2 class="content-subhead">顔認識を正しくさせるため</h2>
+        <p>
+          顔認識を正しくさせるため,メガネを外したり前髪をあげたりすると効果的です.<br>
+          また顔が暗くなっていると認識率がとても下がるので,照明を調整することも効果的です.
+        </p>
+        <p>
+          また壁などをたまに顔認識しますが,ホラーではありません.
+        </p>
+      </section>
+
+      <hr>
+
+      <section>
+        <h2 class="content-subhead">仕様</h2>
+        <p>
+          顔認識ライブラリの仕様上,私の技術の仕様上,FaceRigのように顔の細かな表情がとれません.<br>
+          また,認識がわるいとモデルがﾋﾟｸﾋﾟｸします.(修正検討)<br>
+          FaceRig並みの高機能を求める場合,FaceRigを購入してください.
+        </p>
+        <p>
+          現状では疑似的に顔の向き,眉の上下,口の開閉をトラッキングしています.<br>
+          まばたきは自動で行うように設定しています.
+        </p>
+      </section>
+
+      <hr>
+
+      <section>
+        <h2 class="content-subhead">その他</h2>
+        <p>
+          <a href="http://www.live2d.com/">Live2Dとは</a><br>
+          Live2Dの表示には<a href="http://sites.cybernoids.jp/cubism-sdk2/webgl/webgl_dl">Live2D Cubism SDK 2.0(WebGL)</a>を使わせていただきました.<br>
+          Live2Dのモデルには<a href="http://sites.cybernoids.jp/cubism2/samples">Live2D公式サンプルモデル</a>と<a href="http://library.live2d.com/Libraries/view/000073">kamiyoshiさんオリジナルキャラクター「Libra」</a>を使わせていただきました.
+        </p>
+      </section>
+
+      <div id="boxArea" style="display:table;padding:0 0 0 2px;margin-top: 40px;"><div style="width:74px;height:22px;float:left;"><a href="https://twitter.com/share" class="twitter-share-button"{count} data-lang="ja" data-dnt="true">ツイート</a><script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script></div><div style="width:36px;height:22px;float:left;"><div class="g-plusone" data-size="medium" data-annotation="none"></div>
+      <script type="text/javascript">
+        window.___gcfg = {lang: 'ja'};
+        (function() {
+          var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+          po.src = 'https://apis.google.com/js/platform.js';
+          var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+        })();</script></div><div style="width:82px;height:22px;float:left;"><a href="http://b.hatena.ne.jp/entry/" class="hatena-bookmark-button" data-hatena-bookmark-layout="standard-noballoon" data-hatena-bookmark-lang="ja" title="このエントリーをはてなブックマークに追加"><img src="http://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="http://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script></div><div style="width:67px;height:22px;float:left;"><a data-pocket-label="pocket" data-pocket-count="none" class="pocket-btn" data-lang="en"></a></div><div style="width:86px;height:22px;float:left;"><span><script type="text/javascript" src="//media.line.me/js/line-button.js?v=20140411" ></script><script type="text/javascript">new media_line_me.LineButton({"pc":true,"lang":"ja","type":"a"});</script></span></div><div style="width:66px;height:22px;float:left;"><script src="//platform.linkedin.com/in.js" type="text/javascript">lang: ja_JP</script><script type="IN/Share"></script></div></div><script type="text/javascript">!function(d,i){if(!d.getElementById(i)){var j=d.createElement("script");j.id=i;j.src="https://widgets.getpocket.com/v1/j/btn.js?v=1";var w=d.getElementById(i);d.body.appendChild(j);}}(document,"pocket-btn-js");</script>
+
+    </div>
+  </main>
+</div>
+
+<script src="js/org/ui.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+<script src="js/jquery.pagelink.js"></script>
+<script src="js/jquery.jrumble.1.3.min.js"></script>
+<script src="js/jquery.flyoffpage.full.js"></script>
+<script src="js/jquery.frail.js"></script>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-61533656-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+</body>
+</html>
+
+<!--
+このサイトは以下のCSSテンプレート'PURE'を用いて作成されています.
+http://purecss.io/
+
+Software License Agreement (BSD License)
+========================================
+
+Copyright 2013 Yahoo! Inc. All rights reserved.
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are met:
+
+    * Redistributions of source code must retain the above copyright
+      notice, this list of conditions and the following disclaimer.
+
+    * Redistributions in binary form must reproduce the above copyright
+      notice, this list of conditions and the following disclaimer in the
+      documentation and/or other materials provided with the distribution.
+
+    * Neither the name of the Yahoo! Inc. nor the
+      names of its contributors may be used to endorse or promote products
+      derived from this software without specific prior written permission.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+DISCLAIMED. IN NO EVENT SHALL YAHOO! INC. BE LIABLE FOR ANY
+DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+(INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+-->
