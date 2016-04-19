@@ -1,5 +1,14 @@
 <!--
-( ﾟ∀ﾟ)o彡°
+　　　　||
+　　　　||
+　　　∧||∧
+　　（ / ⌒ヽ
+　　　| | 　|
+　　　∪ / ﾉ
+　　　 | ｜|
+　　　 ∪∪
+
+　　 -━━-
 -->
 
 <!DOCTYPE html>
@@ -7,9 +16,9 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Twitterで見たおっぱい数式をブラウザ上でいじり遊べるようにしました.パラメータをいじることでいろいろな形がつくれます.">
-  <meta name=”keywords” content=”おっぱいグラフ,いーふと,EafT,Webアプリ”>
-  <title>Eaft.org | おっぱいグラフ</title>
+  <meta name="description" content="日本の平均寿命をもとにあなたの寿命を調べます.">
+  <meta name=”keywords” content=”寿命チェッカー,いーふと,EafT,Webアプリ”>
+  <title>Eaft.org | 寿命チェッカー</title>
 
   <link rel="shortcut icon" href="img/favicon.ico">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/0.6.0/pure-min.css">
@@ -47,128 +56,111 @@
 
   <main id="main">
     <header class="header">
-      <h1>おっぱいグラフ</h1>
+      <h1>寿命チェッカー</h1>
       <h2>
-        <a href="https://twitter.com/shimoMathSiGMA/status/133126982220263425">Twitterで見たおっぱい数式</a>をブラウザ上でいじり遊べるようにしました.<br>
-        パラメータをいじることでいろいろな形がつくれます.<br>
-        表示されない場合は最新のブラウザ(<a href="https://www.google.co.jp/chrome/browser/features.html">Google Chrome</a>)などをご使用ください.
+        日本の平均寿命をもとにあなたの寿命を調べます.<br>
       </h2>
     </header>
 
     <div class="content">
       <section>
-        <div id="oppai-container" style="width:100%; height:100%;"></div>
+
+        <p>
+          あなたの誕生日:
+          <input type="date" id="js-birth"><br>
+          あなたの性別:
+          <select id="js-sex">
+          	<option value="man">男性</option>
+          	<option value="woman">女性</option>
+          </select>
+        </p>
+
+        <p>
+          <button class="pure-button pure-button-primary" onclick="view_result()">結果を表示</button>
+        </p>
 
         <style>
-          .oppai-param input {
-            text-align: right;
-            margin-bottom: 5px;
-            width: 75px;
-          }
-          .oppai-param .pure-button {
-            margin-bottom: 5px;
-          }
+        #js-viewer>.big {
+          font-weight: bolder;
+          font-size: 1.25em;
+        }
         </style>
+        <span id="js-viewer"></span>
 
-        <div class="pure-g oppai-param">
-          <div class="pure-u-1-6">
-            b1: <input id="b1" type="number" value="6" step="0.01"><br>
-            b2: <input id="b2" type="number" value="2.718" step="0.01"><br>
-            b3: <input id="b3" type="number" value="-1" step="0.01"><br>
-            b4: <input id="b4" type="number" value="0.667" step="0.01"><br>
-            b5: <input id="b5" type="number" value="-1" step="0.01"><br>
-            b6: <input id="b6" type="number" value="2" step="0.01"><br>
-          </div>
-          <div class="pure-u-1-6">
-            b7: <input id="b7" type="number" value="0.667" step="0.01"><br>
-            b8: <input id="b8" type="number" value="2" step="0.01"><br>
-            b9: <input id="b9" type="number" value="-0.333" step="0.01"><br>
-            b10: <input id="b10" type="number" value="0.667" step="0.01"><br>
-            b11: <input id="b11" type="number" value="0.5" step="0.01"><br>
-            b12: <input id="b12" type="number" value="2" step="0.01"><br>
-          </div>
-          <div class="pure-u-1-6">
-            n1: <input id="n1" type="number" value="0.667" step="0.01"><br>
-            n2: <input id="n2" type="number" value="2.718" step="0.01"><br>
-            n3: <input id="n3" type="number" value="-1" step="0.01"><br>
-            n4: <input id="n4" type="number" value="2.718" step="0.01"><br>
-            n5: <input id="n5" type="number" value="11" step="0.01"><br>
-            n6: <input id="n6" type="number" value="0.667" step="0.01"><br>
-          </div>
-          <div class="pure-u-1-6">
-            n7: <input id="n7" type="number" value="-1" step="0.01"><br>
-            n8: <input id="n8" type="number" value="2" step="0.01"><br>
-            n9: <input id="n9" type="number" value="0.667" step="0.01"><br>
-            n10: <input id="n10" type="number" value="2" step="0.01"><br>
-            n11: <input id="n11" type="number" value="2" step="0.01"><br>
-          </div>
-          <div class="pure-u-1-6">
-            size: <input id="size" type="number" value="0.125" step="0.01"><br>
-            o1: <input id="o1" type="number" value="0.667" step="0.01"><br>
-            o2: <input id="o2" type="number" value="-1" step="0.01"><br>
-            o3: <input id="o3" type="number" value="0.667" step="0.01"><br>
-            o4: <input id="o4" type="number" value="4" step="0.01"><br>
-          </div>
-          <div class="pure-u-1-6">
-            z軸表示域 最小値: <input id="z_min" type="number" value="-2" step="0.01"><br>
-            z軸表示域 最大値: <input id="z_max" type="number" value="2" step="0.01"><br>
-            <button type="button" class="pure-button pure-button-primary" onclick="set_oppai('oppai-container', 'redraw')">再描画</button>
-          </div>
-        </div>
+        <script>
 
-        <script defer type="text/javascript" src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-        <script defer src="oppaigraph/oppai3d.js"></script>
+        // Date型で生まれた日を返す
+        var get_birth = function() {
+        	var birth = String(document.getElementById('js-birth').value);
 
-      </section>
+        	if(birth.length === 0) {
+        		return false;
+        	}
 
-      <hr>
+        	return new Date(birth);
+        }
 
-      <section>
-        <h2 class="content-subhead">元ネタ</h2>
-        <p>
-          天才ですね.
-        </p>
-        <blockquote class="twitter-tweet" data-lang="ja"><p lang="ja" dir="ltr">おっぱいの方程式を発見したよ！ <a href="http://t.co/nM2rtxXC">pic.twitter.com/nM2rtxXC</a></p>&mdash; しもまっしぐま (@shimoMathSiGMA) <a href="https://twitter.com/shimoMathSiGMA/status/133126982220263425">2011年11月6日</a></blockquote>
-        <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
-      </section>
+        // Date型で今まで生きてきた時間を返す
+        var get_live_time = function() {
+        	var birth = get_birth();
+        	if(birth === false) {
+        		return false;
+        	}
 
-      <hr>
+        	var now = new Date();
 
-      <section>
-        <h2 class="content-subhead">パラメータについて</h2>
-        <p>
-          曲面方程式はしもまっしぐまさんが挙げていたのでそのまま使わせていただきました.
-        </p>
+        	return now - birth;
+        }
 
-        <p>
-          方程式を眺めて以下の方程式に分解しました.パラメータを調整できるようにするため,とりあえず変数にできそうなところは変数にしました.
-        </p>
+        // 平均寿命のミリ秒を返す
+        var get_all_time = function() {
+        	var sex = String(document.getElementById('js-sex').value);
 
-        <div class="pure-g">
-          <div class="pure-u-1-1">
-            <img class="pure-img-responsive" src="oppaigraph/oppai_equation.png" alt="おっぱい方程式">
-          </div>
-        </div>
+        	switch (sex) {
+        		case 'man':
+        			return 365.25*80.5*24*60*60*1000;
+        			break;
+        		case 'woman':
+        			return 365.25*86.83*24*60*60*1000;
+        			break;
+        		default:
+        			return false;
+        			break;
+        	}
+        }
 
-        <p>
-          なにも考えないで変数にしたので,べき指数あたり(初期値が2のところ)はあまりいじらない方がいいはずです.
-        </p>
-        <p>
-          方程式からわかるようにb1～b12をいじると乳房が,n1～n12をいじると乳首が,o1～o4をいじると体格が,sizeをいじるとサイズがかわります.
-          (本当は'other'を'body'にしたかったのですが,'breast'の'b'と被るのでやめました.)
-        </p>
-        <p>
-          パラメータ調整の例として,size=0.05にするといい具合に平らになります.(ロリコンほいほいですね)
-        </p>
-      </section>
+        var view_result = function() {
+        	var live_time = get_live_time();
+        	var all_time = get_all_time();
+          var birth = get_birth();
 
-      <hr>
+          if(!(live_time && all_time && birth)) {
+            return;
+          }
 
-      <section>
-        <h2 class="content-subhead">その他</h2>
-        <p>
-          グラフ表示には<a href="https://plot.ly/javascript/">plotly.js</a>を使わせていただきました.
-        </p>
+          var str = "<span class='big'>";
+
+        	str += '生きた日数: ' + Math.floor(live_time/(24*60*60*1000)) + '日(' + (live_time/all_time)*100 + '[%])<br>';
+          str += '残りの日数: ' + Math.floor((all_time-live_time)/(24*60*60*1000)) + '日(' + (100-(live_time/all_time)*100) + '[%])<br>'
+
+        	var date = new Date(Number(birth)+all_time);
+        	var y = date.getFullYear();
+        	var m = date.getMonth() + 1;
+        	var d = date.getDate();
+        	var w = date.getDay();
+        	var day = ['日', '月', '火', '水', '木', '金', '土'];
+          var death_day_str = y + '年' + m + '月' + d + '日(' + day[w] + '曜)';
+        	str += '死ぬ日時: ' + death_day_str;
+
+          str += "</span><p><a href='http://twitter.com/share?text=わたしは" + death_day_str + "に死ぬみたいです...%0a【寿命チェッカー】' class='pure-button pure-button-primary'>結果をつぶやく</a></p>"
+
+          document.getElementById('js-viewer').innerHTML = str;
+
+        }
+
+        </script>
+
+
       </section>
 
       <div id="boxArea" style="display:table;padding:0 0 0 2px;margin-top: 40px;"><div style="width:74px;height:22px;float:left;"><a href="https://twitter.com/share" class="twitter-share-button"{count} data-lang="ja" data-dnt="true">ツイート</a><script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script></div><div style="width:36px;height:22px;float:left;"><div class="g-plusone" data-size="medium" data-annotation="none"></div>
